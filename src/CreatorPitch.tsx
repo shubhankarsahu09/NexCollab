@@ -15,8 +15,8 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
     <div className="min-h-screen bg-[#050505] text-white font-sans overflow-x-hidden selection:bg-white/20">
       
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 px-4 sm:px-6 py-4 mix-blend-difference pointer-events-none">
-        <div className="flex items-center justify-between pointer-events-auto max-w-7xl mx-auto w-full">
+      <nav className="fixed top-0 w-full z-50 bg-[#050505]/80 backdrop-blur-xl border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           
           {/* Left: Brand Name */}
           <div className="flex-1 flex justify-start items-center gap-2 sm:gap-4">
