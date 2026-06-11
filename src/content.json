@@ -1,0 +1,96 @@
+{
+  "brand": {
+    "name": "NexCollabs",
+    "logoText": "NexCollabs"
+  },
+  "landing": {
+    "headingLine1": "Connecting brands",
+    "headingLine2": "with true voices",
+    "paragraphLeft": "Every successful campaign starts with an authentic connection. We bridge the gap between visionary brands and influential creators.",
+    "paragraphRight": "Our platform lets you discover top-tier talent and negotiate partnerships that drive real engagement and unparalleled results.",
+    "buttonText": "Get Started"
+  },
+  "hero": {
+    "title": "Empowering Brands & Creators",
+    "subtitle": "Connecting visionary brands with authentic voices to create impactful digital campaigns."
+  },
+  "about": {
+    "title": "About Me",
+    "text": "I specialize in bridging the gap between innovative brands and top-tier creators. With years of experience in influencer marketing and digital strategy, I help you navigate the creator economy to scale your brand or monetize your audience effectively."
+  },
+  "services": [
+    {
+      "title": "Creator Outreach",
+      "description": "Identifying and engaging the perfect voices for your brand.",
+      "icon": "Users"
+    },
+    {
+      "title": "Brand Partnerships",
+      "description": "Securing long-term, lucrative deals for creators.",
+      "icon": "Handshake"
+    },
+    {
+      "title": "Influencer Marketing",
+      "description": "End-to-end campaign execution that drives measurable ROI.",
+      "icon": "TrendingUp"
+    },
+    {
+      "title": "Campaign Management",
+      "description": "Handling logistics, contracts, and deliverables seamlessly.",
+      "icon": "Briefcase"
+    },
+    {
+      "title": "Social Media Strategy",
+      "description": "Data-driven insights to grow your audience and engagement.",
+      "icon": "BarChart"
+    }
+  ],
+  "portfolio": [
+    {
+      "client": "TechCorp Global",
+      "result": "Generated 2M+ impressions in 48 hours",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      "client": "Lifestyle Co.",
+      "result": "300% ROI on influencer spend",
+      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      "client": "Gaming Studio X",
+      "result": "Top trending hashtag on launch day",
+      "image": "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=800"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "The best partnership we've ever had. Brought incredible ROI and brand awareness.",
+      "author": "Sarah J., CMO"
+    },
+    {
+      "quote": "Helped me secure deals I never thought possible. A true professional.",
+      "author": "Alex T., Top Creator"
+    }
+  ],
+  "blog": [
+    {
+      "title": "5 Tips for Negotiating Brand Deals",
+      "date": "Oct 12, 2026",
+      "category": "Creators"
+    },
+    {
+      "title": "How to Measure Influencer Marketing ROI",
+      "date": "Sep 28, 2026",
+      "category": "Brands"
+    }
+  ],
+  "contact": {
+    "email": "hello@nexcollabs.com",
+    "whatsapp": "+1234567890",
+    "social": {
+      "twitter": "https://twitter.com",
+      "linkedin": "https://linkedin.com",
+      "instagram": "https://instagram.com"
+    }
+  }
+}
