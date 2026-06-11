@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Target, Check } from 'lucide-react';
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm } from '@formspree/react';
 
 export default function MainSite({ onBack }: { userType: 'creator' | 'brand', onBack: () => void }) {
   const [state, handleSubmit] = useForm('mgobljkp');

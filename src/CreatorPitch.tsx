@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Users, Briefcase, ChevronRight, Check } from 'lucide-react';
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm } from '@formspree/react';
 
 export default function CreatorPitch({ onBack }: { onBack: () => void }) {
   const [state, handleSubmit] = useForm('mgobljkp');
