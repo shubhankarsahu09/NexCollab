@@ -154,11 +154,7 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
               formData.append('niche', JSON.stringify(niche));
               formData.append('goal', goal);
 
-              const endpoint = 'YOUR_FORMSPREE_ENDPOINT_HERE'; // e.g., https://formspree.io/f/xyz
-              if (endpoint === 'YOUR_FORMSPREE_ENDPOINT_HERE') {
-                alert('Please replace YOUR_FORMSPREE_ENDPOINT_HERE with your actual Formspree URL in CreatorPitch.tsx');
-                return;
-              }
+              const endpoint = 'https://formspree.io/f/mgobljkp';
 
               try {
                 const response = await fetch(endpoint, {

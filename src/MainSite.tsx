@@ -176,11 +176,7 @@ export default function MainSite({ onBack }: { userType: 'creator' | 'brand', on
               formData.append('objective', briefState.objective);
               formData.append('demographics', JSON.stringify(briefState.demographics));
 
-              const endpoint = 'YOUR_FORMSPREE_ENDPOINT_HERE'; // e.g., https://formspree.io/f/xyz
-              if (endpoint === 'YOUR_FORMSPREE_ENDPOINT_HERE') {
-                alert('Please replace YOUR_FORMSPREE_ENDPOINT_HERE with your actual Formspree URL in MainSite.tsx');
-                return;
-              }
+              const endpoint = 'https://formspree.io/f/mgobljkp';
 
               try {
                 const response = await fetch(endpoint, {
