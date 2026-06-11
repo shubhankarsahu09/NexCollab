@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Target } from 'lucide-react';
+import { CheckCircle, Target, Check } from 'lucide-react';
+import { useForm, ValidationError } from '@formspree/react';
 
 export default function MainSite({ onBack }: { userType: 'creator' | 'brand', onBack: () => void }) {
+  const [state, handleSubmit] = useForm('mgobljkp');
 
   // Inbound Brief State
   const [briefState, setBriefState] = useState({
@@ -166,35 +168,21 @@ export default function MainSite({ onBack }: { userType: 'creator' | 'brand', on
             <p className="text-gray-500 dark:text-gray-400 text-lg">Tell us about your brand and what you want to achieve.</p>
           </div>
 
+          {state.succeeded ? (
+            <div className="relative z-10 text-center py-16 space-y-6">
+              <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Check className="w-10 h-10 text-green-500" />
+              </div>
+              <h3 className="text-3xl font-bold">Brief Submitted</h3>
+              <p className="text-gray-500 dark:text-gray-400">Our team is reviewing your requirements and will reach out shortly.</p>
+            </div>
+          ) : (
           <form 
             className="space-y-8 relative z-10" 
-            onSubmit={async (e) => { 
-              e.preventDefault(); 
-              const form = e.currentTarget;
-              const formData = new FormData(form);
-              // Append complex state data to FormData
-              formData.append('objective', briefState.objective);
-              formData.append('demographics', JSON.stringify(briefState.demographics));
-
-              const endpoint = 'https://formspree.io/f/mgobljkp';
-
-              try {
-                const response = await fetch(endpoint, {
-                  method: 'POST',
-                  body: formData,
-                  headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                  alert('Campaign brief submitted successfully!');
-                  form.reset();
-                } else {
-                  alert('Oops! There was a problem submitting your form');
-                }
-              } catch (error) {
-                alert('Oops! There was a problem submitting your form');
-              }
-            }}
+            onSubmit={handleSubmit}
           >
+            <input type="hidden" name="objective" value={briefState.objective} />
+            <input type="hidden" name="demographics" value={JSON.stringify(briefState.demographics)} />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Brand Name */}
@@ -290,12 +278,14 @@ export default function MainSite({ onBack }: { userType: 'creator' | 'brand', on
             <div className="pt-8 border-t border-gray-200/50 dark:border-white/5">
               <button
                 type="submit"
-                className="w-full bg-gray-900 dark:bg-white text-white dark:text-black font-bold text-lg py-4 rounded-2xl transition-transform hover:scale-[1.02] shadow-xl flex justify-center items-center gap-3"
+                disabled={state.submitting}
+                className="w-full bg-gray-900 dark:bg-white text-white dark:text-black font-bold text-lg py-4 rounded-2xl transition-transform hover:scale-[1.02] shadow-xl flex justify-center items-center gap-3 disabled:opacity-50"
               >
-                Submit Campaign Brief <Target className="w-5 h-5" />
+                {state.submitting ? 'Submitting...' : 'Submit Campaign Brief'} <Target className="w-5 h-5" />
               </button>
             </div>
           </form>
+          )}
         </section>
 
       </main>

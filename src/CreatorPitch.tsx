@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Users, Briefcase, ChevronRight } from 'lucide-react';
+import { ShieldCheck, Users, Briefcase, ChevronRight, Check } from 'lucide-react';
+import { useForm, ValidationError } from '@formspree/react';
 
 export default function CreatorPitch({ onBack }: { onBack: () => void }) {
+  const [state, handleSubmit] = useForm('mgobljkp');
   const [handle, setHandle] = useState('');
   const [niche, setNiche] = useState<string[]>([]);
   const [goal, setGoal] = useState('More brand deals');
@@ -143,37 +145,21 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
 
         {/* CREATOR APPLICATION FORM */}
         <section id="apply" className="mb-32 max-w-4xl mx-auto bg-zinc-900/40 backdrop-blur-3xl border border-white/10 p-8 md:p-12 rounded-[40px] relative shadow-2xl">
+          {state.succeeded ? (
+            <div className="relative z-10 text-center py-16 space-y-6">
+              <div className="w-20 h-20 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Check className="w-10 h-10 text-purple-500" />
+              </div>
+              <h3 className="text-3xl font-bold">Application Received</h3>
+              <p className="text-white/60">We've received your application. Our talent team will review your profile and reach out shortly.</p>
+            </div>
+          ) : (
           <form 
             className="relative z-10 space-y-12"
-            onSubmit={async (e) => { 
-              e.preventDefault(); 
-              const form = e.currentTarget;
-              const formData = new FormData(form);
-              
-              // Append complex state data to FormData
-              formData.append('niche', JSON.stringify(niche));
-              formData.append('goal', goal);
-
-              const endpoint = 'https://formspree.io/f/mgobljkp';
-
-              try {
-                const response = await fetch(endpoint, {
-                  method: 'POST',
-                  body: formData,
-                  headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                  alert('Application submitted successfully!');
-                  form.reset();
-                  setHandle(''); // clear state
-                } else {
-                  alert('Oops! There was a problem submitting your application');
-                }
-              } catch (error) {
-                alert('Oops! There was a problem submitting your application');
-              }
-            }}
+            onSubmit={handleSubmit}
           >
+            <input type="hidden" name="niche" value={JSON.stringify(niche)} />
+            <input type="hidden" name="goal" value={goal} />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Full Name */}
@@ -273,13 +259,15 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
             <div className="pt-8 border-t border-white/5">
               <button 
                 type="submit"
-                className="w-full bg-white text-black font-bold text-lg py-4 rounded-2xl transition-transform hover:scale-[1.02] shadow-xl flex justify-center items-center gap-3"
+                disabled={state.submitting}
+                className="w-full bg-white text-black font-bold text-lg py-4 rounded-2xl transition-transform hover:scale-[1.02] shadow-xl flex justify-center items-center gap-3 disabled:opacity-50"
               >
-                Submit Application <ChevronRight className="w-5 h-5" />
+                {state.submitting ? 'Submitting...' : 'Submit Application'} <ChevronRight className="w-5 h-5" />
               </button>
             </div>
 
           </form>
+          )}
         </section>
 
       </main>
