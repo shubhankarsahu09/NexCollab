@@ -166,7 +166,39 @@ export default function MainSite({ onBack }: { userType: 'creator' | 'brand', on
             <p className="text-gray-500 dark:text-gray-400 text-lg">Tell us about your brand and what you want to achieve.</p>
           </div>
 
-          <form className="space-y-8 relative z-10" onSubmit={(e) => { e.preventDefault(); alert('Campaign brief submitted!'); }}>
+          <form 
+            className="space-y-8 relative z-10" 
+            onSubmit={async (e) => { 
+              e.preventDefault(); 
+              const form = e.currentTarget;
+              const formData = new FormData(form);
+              // Append complex state data to FormData
+              formData.append('objective', briefState.objective);
+              formData.append('demographics', JSON.stringify(briefState.demographics));
+
+              const endpoint = 'YOUR_FORMSPREE_ENDPOINT_HERE'; // e.g., https://formspree.io/f/xyz
+              if (endpoint === 'YOUR_FORMSPREE_ENDPOINT_HERE') {
+                alert('Please replace YOUR_FORMSPREE_ENDPOINT_HERE with your actual Formspree URL in MainSite.tsx');
+                return;
+              }
+
+              try {
+                const response = await fetch(endpoint, {
+                  method: 'POST',
+                  body: formData,
+                  headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                  alert('Campaign brief submitted successfully!');
+                  form.reset();
+                } else {
+                  alert('Oops! There was a problem submitting your form');
+                }
+              } catch (error) {
+                alert('Oops! There was a problem submitting your form');
+              }
+            }}
+          >
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Brand Name */}
@@ -174,6 +206,7 @@ export default function MainSite({ onBack }: { userType: 'creator' | 'brand', on
                 <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">Brand Name</label>
                 <input 
                   type="text" 
+                  name="brandName"
                   placeholder="e.g. Nike, Acme Corp" 
                   className="w-full bg-white dark:bg-zinc-800/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-colors text-gray-900 dark:text-white"
                   required 
@@ -185,6 +218,7 @@ export default function MainSite({ onBack }: { userType: 'creator' | 'brand', on
                 <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">Product or Service</label>
                 <input 
                   type="text" 
+                  name="product"
                   placeholder="What are we promoting?" 
                   className="w-full bg-white dark:bg-zinc-800/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-colors text-gray-900 dark:text-white"
                   required 
@@ -196,6 +230,7 @@ export default function MainSite({ onBack }: { userType: 'creator' | 'brand', on
                 <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">Budget ($ USD)</label>
                 <input 
                   type="number" 
+                  name="budget"
                   min="0"
                   placeholder="e.g. 50000" 
                   className="w-full bg-white dark:bg-zinc-800/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-colors text-gray-900 dark:text-white"
@@ -208,6 +243,7 @@ export default function MainSite({ onBack }: { userType: 'creator' | 'brand', on
                 <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">Creator Type Needed</label>
                 <input 
                   type="text" 
+                  name="creatorType"
                   placeholder="e.g. Tech Reviewers, Fashion Vloggers" 
                   className="w-full bg-white dark:bg-zinc-800/50 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-colors text-gray-900 dark:text-white"
                   required 

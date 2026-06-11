@@ -143,7 +143,41 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
 
         {/* CREATOR APPLICATION FORM */}
         <section id="apply" className="mb-32 max-w-4xl mx-auto bg-zinc-900/40 backdrop-blur-3xl border border-white/10 p-8 md:p-12 rounded-[40px] relative shadow-2xl">
-          <form onSubmit={(e) => { e.preventDefault(); alert('Application submitted!'); }} className="relative z-10 space-y-12">
+          <form 
+            className="relative z-10 space-y-12"
+            onSubmit={async (e) => { 
+              e.preventDefault(); 
+              const form = e.currentTarget;
+              const formData = new FormData(form);
+              
+              // Append complex state data to FormData
+              formData.append('niche', JSON.stringify(niche));
+              formData.append('goal', goal);
+
+              const endpoint = 'YOUR_FORMSPREE_ENDPOINT_HERE'; // e.g., https://formspree.io/f/xyz
+              if (endpoint === 'YOUR_FORMSPREE_ENDPOINT_HERE') {
+                alert('Please replace YOUR_FORMSPREE_ENDPOINT_HERE with your actual Formspree URL in CreatorPitch.tsx');
+                return;
+              }
+
+              try {
+                const response = await fetch(endpoint, {
+                  method: 'POST',
+                  body: formData,
+                  headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                  alert('Application submitted successfully!');
+                  form.reset();
+                  setHandle(''); // clear state
+                } else {
+                  alert('Oops! There was a problem submitting your application');
+                }
+              } catch (error) {
+                alert('Oops! There was a problem submitting your application');
+              }
+            }}
+          >
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Full Name */}
@@ -151,6 +185,7 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
                 <label className="text-xs font-bold uppercase tracking-widest text-white/50">Full Name</label>
                 <input 
                   type="text" 
+                  name="fullName"
                   placeholder="e.g. Jane Doe" 
                   className="w-full bg-zinc-800/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-purple-500 transition-colors text-white placeholder:text-white/20"
                   required 
@@ -162,6 +197,7 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
                 <label className="text-xs font-bold uppercase tracking-widest text-white/50">Creator Handle</label>
                 <input 
                   type="text" 
+                  name="handle"
                   placeholder="@username or URL" 
                   value={handle}
                   onChange={(e) => setHandle(e.target.value)}
@@ -175,6 +211,7 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
                 <label className="text-xs font-bold uppercase tracking-widest text-white/50">Email Address</label>
                 <input 
                   type="email" 
+                  name="email"
                   placeholder="hello@creator.com" 
                   className="w-full bg-zinc-800/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-purple-500 transition-colors text-white placeholder:text-white/20"
                   required 
@@ -186,6 +223,7 @@ export default function CreatorPitch({ onBack }: { onBack: () => void }) {
                 <label className="text-xs font-bold uppercase tracking-widest text-white/50">Follower Count</label>
                 <input 
                   type="number" 
+                  name="followerCount"
                   min="0"
                   placeholder="e.g. 500000" 
                   className="w-full bg-zinc-800/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-purple-500 transition-colors text-white placeholder:text-white/20"
